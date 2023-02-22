@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission06_jazz3987.Models;
 
@@ -11,12 +12,10 @@ namespace Mission06_jazz3987.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private MovieInfoContext movieContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, MovieInfoContext x)
+        public HomeController(MovieInfoContext x)
         {
-            _logger = logger;
             movieContext = x;
         }
 
@@ -33,6 +32,8 @@ namespace Mission06_jazz3987.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
+            ViewBag.Category = movieContext.Categories.ToList();
+            
             return View();
         }
 
@@ -45,10 +46,13 @@ namespace Mission06_jazz3987.Controllers
             return View("Confirmation"); //show confirmation page
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult ShowMoviesList()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var movies = movieContext.MovieForms
+                .Include(x => x.Category)
+                .OrderBy(x => x.Category)
+                .ToList();
+            return View(movies);
         }
     }
 }

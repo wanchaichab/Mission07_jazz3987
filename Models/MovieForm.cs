@@ -10,9 +10,6 @@ namespace Mission06_jazz3987.Models
 		public int MovieId { get; set; }
 
 		[Required]
-		public string Category { get; set; }
-
-		[Required]
 		public string Title { get; set; }
 
 		[Required]
@@ -30,6 +27,10 @@ namespace Mission06_jazz3987.Models
 
 		public string Notes { get; set; }
 
-	}
+		// Build Foreign Key Relationship
+        [Required]
+        public int CategoryID { get; set; }
+		public Category Category { get; set; }
+    }
 }
 

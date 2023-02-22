@@ -8,8 +8,8 @@ using Mission06_jazz3987.Models;
 namespace Mission06_jazz3987.Migrations
 {
     [DbContext(typeof(MovieInfoContext))]
-    [Migration("20230214004413_Initial")]
-    partial class Initial
+    [Migration("20230221230352_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,15 +17,45 @@ namespace Mission06_jazz3987.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_jazz3987.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Anime"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Comedy/Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Action/Adventure"
+                        });
+                });
+
             modelBuilder.Entity("Mission06_jazz3987.Models.MovieForm", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -53,13 +83,15 @@ namespace Mission06_jazz3987.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("MovieForms");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Anime",
+                            CategoryID = 1,
                             Director = "Makoto Shinkai",
                             Edited = "",
                             LentTo = "",
@@ -71,7 +103,7 @@ namespace Mission06_jazz3987.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Anime",
+                            CategoryID = 1,
                             Director = "Makoto Shinkai",
                             Edited = "No",
                             LentTo = "",
@@ -83,7 +115,7 @@ namespace Mission06_jazz3987.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Comedy/Drama",
+                            CategoryID = 2,
                             Director = "Daniel Kwan",
                             Edited = "",
                             LentTo = "Jacob",
@@ -92,6 +124,15 @@ namespace Mission06_jazz3987.Migrations
                             Title = "Everything Everywhere All at Once",
                             Year = 2022
                         });
+                });
+
+            modelBuilder.Entity("Mission06_jazz3987.Models.MovieForm", b =>
+                {
+                    b.HasOne("Mission06_jazz3987.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

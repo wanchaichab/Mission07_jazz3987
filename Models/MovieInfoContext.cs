@@ -13,14 +13,36 @@ namespace Mission06_jazz3987.Models
 
 		public DbSet<MovieForm> MovieForms { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder mb)
         {
-			modelBuilder.Entity<MovieForm>().HasData(
-				//Seed database
+            // Seed Categories
+            mb.Entity<Category>().HasData(
+                new Category
+                {
+                    CategoryID = 1,
+                    CategoryName = "Anime"
+                },
+                new Category
+                {
+                    CategoryID = 2,
+                    CategoryName = "Comedy/Drama"
+                },
+                new Category
+                {
+                    CategoryID = 3,
+                    CategoryName = "Action/Adventure"
+                }
+                );
+
+            //Seed database
+            mb.Entity<MovieForm>().HasData(
+				
 				new MovieForm
 				{
 					MovieId = 1,
-					Category = "Anime",
+					CategoryID = 1,
 					Title = "Kimi no na wa",
 					Year = 2016,
 					Director = "Makoto Shinkai",
@@ -32,7 +54,7 @@ namespace Mission06_jazz3987.Models
                 new MovieForm
                 {
                     MovieId = 2,
-                    Category = "Anime",
+                    CategoryID = 1,
                     Title = "Tenki no Ko",
                     Year = 2019,
                     Director = "Makoto Shinkai",
@@ -44,7 +66,7 @@ namespace Mission06_jazz3987.Models
                 new MovieForm
                 {
                     MovieId = 3,
-                    Category = "Comedy/Drama",
+                    CategoryID = 2,
                     Title = "Everything Everywhere All at Once",
                     Year = 2022,
                     Director = "Daniel Kwan",
