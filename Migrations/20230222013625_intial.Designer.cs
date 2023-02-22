@@ -8,7 +8,7 @@ using Mission06_jazz3987.Models;
 namespace Mission06_jazz3987.Migrations
 {
     [DbContext(typeof(MovieInfoContext))]
-    [Migration("20230221230352_intial")]
+    [Migration("20230222013625_intial")]
     partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,41 @@ namespace Mission06_jazz3987.Migrations
                         {
                             CategoryID = 3,
                             CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryID = 9,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryID = 10,
+                            CategoryName = "VHS"
                         });
                 });
 

@@ -40,10 +40,20 @@ namespace Mission06_jazz3987.Controllers
         [HttpPost]
         public IActionResult AddMovie(MovieForm mf)
         {
-            movieContext.Add(mf); //add and save data to database
-            movieContext.SaveChanges();
+            if (ModelState.IsValid) //Validate data
+            {
+                movieContext.Add(mf); //add and save data to database
+                movieContext.SaveChanges();
 
-            return View("Confirmation"); //show confirmation page
+                return View("Confirmation", mf); //show confirmation page
+            }
+
+            else
+            {
+                ViewBag.Category = movieContext.Categories.ToList();
+                return View();
+            }
+            
         }
 
         public IActionResult ShowMoviesList()
@@ -53,6 +63,41 @@ namespace Mission06_jazz3987.Controllers
                 .OrderBy(x => x.Category)
                 .ToList();
             return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int movieid)
+        {
+            ViewBag.Category = movieContext.Categories.ToList();
+
+            var movie = movieContext.MovieForms.Single(x => x.MovieId == movieid); // Get id of movie from edit link
+
+            return View("AddMovie", movie);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieForm mf)
+        {
+            movieContext.Update(mf);
+            movieContext.SaveChanges();
+
+            return RedirectToAction("ShowMoviesList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+            var movie = movieContext.MovieForms.Single(x => x.MovieId == movieid);
+            return View(movie);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieForm mf)
+        {
+            movieContext.MovieForms.Remove(mf);
+            movieContext.SaveChanges();
+
+            return RedirectToAction("ShowMoviesList");
         }
     }
 }

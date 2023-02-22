@@ -43,6 +43,41 @@ namespace Mission06_jazz3987.Migrations
                         {
                             CategoryID = 3,
                             CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryID = 9,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryID = 10,
+                            CategoryName = "VHS"
                         });
                 });
 

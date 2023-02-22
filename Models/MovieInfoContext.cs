@@ -33,6 +33,41 @@ namespace Mission06_jazz3987.Models
                 {
                     CategoryID = 3,
                     CategoryName = "Action/Adventure"
+                },
+                new Category
+                {
+                    CategoryID = 4,
+                    CategoryName = "Comedy"
+                },
+                new Category
+                {
+                    CategoryID = 5,
+                    CategoryName = "Drama"
+                },
+                new Category
+                {
+                    CategoryID = 6,
+                    CategoryName = "Family"
+                },
+                new Category
+                {
+                    CategoryID = 7,
+                    CategoryName = "Horror/Suspense"
+                },
+                new Category
+                {
+                    CategoryID = 8,
+                    CategoryName = "Miscellaneous"
+                },
+                new Category
+                {
+                    CategoryID = 9,
+                    CategoryName = "Television"
+                },
+                new Category
+                {
+                    CategoryID = 10,
+                    CategoryName = "VHS"
                 }
                 );
 
